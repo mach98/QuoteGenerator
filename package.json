@@ -14,6 +14,7 @@
     "@types/react-native-vector-icons": "^6.4.13",
     "react": "18.2.0",
     "react-native": "0.71.2",
+    "react-native-share": "^8.2.0",
     "react-native-snackbar": "^2.4.0",
     "react-native-tts": "^4.1.0",
     "react-native-vector-icons": "^9.2.0"
