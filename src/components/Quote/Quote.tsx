@@ -6,6 +6,8 @@ import styles from './Quote.stylesheet';
 import {MAIN_COLOR} from '../../Constants/COLORS';
 
 import Tts from 'react-native-tts';
+import Clipboard from '@react-native-clipboard/clipboard';
+import Snackbar from 'react-native-snackbar';
 
 Tts.setDefaultLanguage('en-GB');
 Tts.setDefaultVoice('com.apple.ttsbundle.Samantha-compact');
@@ -17,6 +19,7 @@ const Quote = () => {
   const [Author, setAuthor] = useState('Loading...');
   const [isLoading, setIsLoading] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [copiedText, setCopiedText] = useState('');
 
   const newQuote = () => {
     setIsLoading(true);
@@ -34,6 +37,14 @@ const Quote = () => {
     Tts.speak(Quote + ' by ' + Author);
     Tts.addEventListener('tts-start', event => setIsSpeaking(true));
     Tts.addEventListener('tts-finish', event => setIsSpeaking(false));
+  };
+
+  const copyToClipBoard = () => {
+    Clipboard.setString(Quote);
+    Snackbar.show({
+      text: 'Quote Copied!',
+      duration: Snackbar.LENGTH_SHORT,
+    });
   };
 
   useEffect(() => {
@@ -70,7 +81,7 @@ const Quote = () => {
         <TouchableOpacity
           onPress={speakNow}
           style={{
-            ...styles.volumeUpIcon,
+            ...styles.actionButton,
             backgroundColor: isSpeaking ? MAIN_COLOR : '#fff',
           }}>
           <FontAwesome
@@ -80,11 +91,11 @@ const Quote = () => {
           />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => {}} style={styles.volumeUpIcon}>
+        <TouchableOpacity onPress={copyToClipBoard} style={styles.actionButton}>
           <FontAwesome5 name="copy" size={22} color={MAIN_COLOR} />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => {}} style={styles.volumeUpIcon}>
+        <TouchableOpacity onPress={() => {}} style={styles.actionButton}>
           <FontAwesome name="share" size={22} color={MAIN_COLOR} />
         </TouchableOpacity>
       </View>
