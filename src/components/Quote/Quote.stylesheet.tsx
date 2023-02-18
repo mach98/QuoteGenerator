@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     marginTop: 12,
   },
-  volumeUpIcon: {
+  actionButton: {
     borderWidth: 2,
     borderColor: MAIN_COLOR,
     borderRadius: 50,
